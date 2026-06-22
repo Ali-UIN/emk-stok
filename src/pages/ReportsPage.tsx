@@ -27,7 +27,7 @@ export default function ReportsPage() {
       })
       if (error) throw error
 
-      const reportRows: ReportRow[] = (data ?? []).map((r: any) => ({
+      const reportRows: ReportRow[] = (data ?? []).map((r: ReportRow) => ({
         product_name: r.product_name ?? '',
         category: r.category ?? '',
         sku: r.sku ?? null,
@@ -246,7 +246,7 @@ export default function ReportsPage() {
     })
 
     // Footer
-    const pageCount = (doc as any).internal.getNumberOfPages()
+    const pageCount = doc.getNumberOfPages()
     for (let i = 1; i <= pageCount; i++) {
       doc.setPage(i)
       doc.setFontSize(8)

@@ -1,5 +1,8 @@
 # emkarin.id — Stock Management PWA
 
+[![CI](https://github.com/Ali-UIN/emk-stok/actions/workflows/ci.yml/badge.svg)](https://github.com/Ali-UIN/emk-stok/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
+
 Aplikasi manajemen stok untuk toko fashion **emkarin.id** berbasis Progressive Web App (PWA).
 
 ## Fitur
@@ -132,3 +135,10 @@ Semua sudah tercakup di `.gitignore`.
 - **Export Excel** memakai **ExcelJS** dan aplikasi ini **hanya menulis** file
   `.xlsx` (tidak pernah mem-*parse* file dari pengguna). Jika ke depan menambah
   fitur *import* Excel, validasi/sanitasi isi file sebelum diproses.
+
+---
+
+## Lisensi
+
+Dirilis di bawah [MIT License](./LICENSE) — bebas dipakai, dimodifikasi, dan
+didistribusikan dengan tetap menyertakan notis hak cipta.

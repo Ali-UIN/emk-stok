@@ -1,10 +1,10 @@
 export type Category = 'Abaya' | 'Gamis' | 'Hijab' | 'RTW' | 'Celana Jeans Grandest'
-export type Size = 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'All Size'
+export type Size = 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'All Size' | 'S - M' | 'L - XL'
 export type MovementType = 'in' | 'out'
 export type UserRole = 'admin' | 'owner'
 
 export const CATEGORIES: Category[] = ['Abaya', 'Gamis', 'Hijab', 'RTW', 'Celana Jeans Grandest']
-export const SIZES: Size[] = ['S', 'M', 'L', 'XL', 'XXL', 'All Size']
+export const SIZES: Size[] = ['S', 'M', 'L', 'XL', 'XXL', 'All Size', 'S - M', 'L - XL']
 
 export interface Product {
   id: string

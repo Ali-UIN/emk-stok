@@ -24,7 +24,8 @@ export default function Sidebar() {
   const [showLogout, setShowLogout] = useState(false)
 
   return (
-    <aside className="hidden lg:flex flex-col fixed left-0 top-0 h-screen w-64 bg-surface border-r border-border z-30">
+    <>
+      <aside className="hidden lg:flex flex-col fixed left-0 top-0 h-screen w-64 bg-surface border-r border-border z-30">
       {/* Brand */}
       <div className="flex items-center gap-3 px-6 py-5 border-b border-border">
         <div className="w-9 h-9 bg-black rounded-lg flex items-center justify-center border border-gold/30">

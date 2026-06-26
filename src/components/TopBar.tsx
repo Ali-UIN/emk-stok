@@ -37,9 +37,16 @@ export default function TopBar() {
         </button>
       </div>
 
-      {/* Mobile brand */}
+      {/* Mobile: badge role + logout button */}
       <div className="lg:hidden flex items-center gap-2">
         <span className="badge-gold capitalize text-xs">{role}</span>
+        <button
+          onClick={signOut}
+          className="p-2 rounded-lg text-text-secondary hover:text-red-400 hover:bg-red-500/10 transition-colors"
+          title="Keluar"
+        >
+          <LogOut size={16} />
+        </button>
       </div>
     </header>
   )

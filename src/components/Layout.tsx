@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom'
 import Sidebar from './Sidebar'
 import MobileNav from './MobileNav'
 import TopBar from './TopBar'
+import PWAInstallBanner from './PWAInstallBanner'
 
 export default function Layout() {
   return (
@@ -19,6 +20,9 @@ export default function Layout() {
 
       {/* Mobile bottom navigation */}
       <MobileNav />
+
+      {/* PWA Install Banner */}
+      <PWAInstallBanner />
     </div>
   )
 }

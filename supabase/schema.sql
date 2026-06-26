@@ -44,7 +44,7 @@ create trigger on_auth_user_created
 create table if not exists public.products (
   id uuid default uuid_generate_v4() primary key,
   name text not null,
-  category text not null check (category in ('Abaya', 'Gamis', 'Hijab', 'RTW')),
+  category text not null check (category in ('Abaya', 'Gamis', 'Hijab', 'RTW', 'Grandest', 'Celana')),
   sku text unique,
   description text,
   sizes text[] not null default '{}',

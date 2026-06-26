@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { LogOut } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
+import ConfirmDialog from './ConfirmDialog'
 
 const pageTitles: Record<string, string> = {
   '/dashboard': 'Dashboard',
@@ -13,9 +15,11 @@ const pageTitles: Record<string, string> = {
 export default function TopBar() {
   const location = useLocation()
   const { user, role, signOut } = useAuth()
+  const [showLogout, setShowLogout] = useState(false)
   const title = pageTitles[location.pathname] ?? 'emkarin.id'
 
   return (
+    <>
     <header className="sticky top-0 z-20 bg-surface/80 backdrop-blur border-b border-border px-4 md:px-6 py-3 flex items-center justify-between gap-4">
       <div>
         <h1 className="text-text-primary font-semibold text-base md:text-lg">{title}</h1>
@@ -41,7 +45,7 @@ export default function TopBar() {
       <div className="lg:hidden flex items-center gap-2">
         <span className="badge-gold capitalize text-xs">{role}</span>
         <button
-          onClick={signOut}
+          onClick={() => setShowLogout(true)}
           className="p-2 rounded-lg text-text-secondary hover:text-red-400 hover:bg-red-500/10 transition-colors"
           title="Keluar"
         >
@@ -49,5 +53,18 @@ export default function TopBar() {
         </button>
       </div>
     </header>
+
+    <ConfirmDialog
+      open={showLogout}
+      title="Keluar dari Akun?"
+      message="Kamu akan keluar dari sesi ini. Pastikan semua pekerjaan sudah tersimpan."
+      confirmLabel="Ya, Keluar"
+      cancelLabel="Batal"
+      variant="warning"
+      icon="logout"
+      onConfirm={signOut}
+      onCancel={() => setShowLogout(false)}
+    />
+    </>
   )
 }

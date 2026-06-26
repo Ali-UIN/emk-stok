@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import {
   LayoutDashboard,
@@ -8,6 +9,7 @@ import {
   LogOut,
 } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
+import ConfirmDialog from './ConfirmDialog'
 
 const navItems = [
   { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
@@ -19,6 +21,7 @@ const navItems = [
 
 export default function Sidebar() {
   const { user, role, signOut } = useAuth()
+  const [showLogout, setShowLogout] = useState(false)
 
   return (
     <aside className="hidden lg:flex flex-col fixed left-0 top-0 h-screen w-64 bg-surface border-r border-border z-30">
@@ -67,7 +70,7 @@ export default function Sidebar() {
           </div>
         </div>
         <button
-          onClick={signOut}
+          onClick={() => setShowLogout(true)}
           className="flex items-center gap-3 w-full px-3 py-2 rounded-lg text-text-secondary hover:bg-red-500/10 hover:text-red-400 transition-colors text-sm"
         >
           <LogOut size={16} />
@@ -75,5 +78,18 @@ export default function Sidebar() {
         </button>
       </div>
     </aside>
+
+    <ConfirmDialog
+      open={showLogout}
+      title="Keluar dari Akun?"
+      message="Kamu akan keluar dari sesi ini. Pastikan semua pekerjaan sudah tersimpan."
+      confirmLabel="Ya, Keluar"
+      cancelLabel="Batal"
+      variant="warning"
+      icon="logout"
+      onConfirm={signOut}
+      onCancel={() => setShowLogout(false)}
+    />
+  </>
   )
 }

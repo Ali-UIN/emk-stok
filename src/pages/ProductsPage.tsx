@@ -5,6 +5,7 @@ import { supabase } from '../lib/supabase'
 import { useAuth } from '../contexts/AuthContext'
 import { CATEGORIES, SIZES, type Product, type ProductFormData, type Category } from '../types'
 import { generateSKU, formatDate } from '../lib/utils'
+import ConfirmDialog from '../components/ConfirmDialog'
 
 const DEFAULT_FORM: ProductFormData = {
   name: '',
@@ -26,6 +27,7 @@ export default function ProductsPage() {
   const [form, setForm] = useState<ProductFormData>(DEFAULT_FORM)
   const [saving, setSaving] = useState(false)
   const [colorInput, setColorInput] = useState('')
+  const [deleteTarget, setDeleteTarget] = useState<Product | null>(null)
 
   const fetchProducts = useCallback(async () => {
     setLoading(true)
@@ -119,10 +121,15 @@ export default function ProductsPage() {
   }
 
   const handleDelete = async (p: Product) => {
-    if (!confirm(`Hapus produk "${p.name}"? Semua data stok terkait akan ikut terhapus.`)) return
-    const { error } = await supabase.from('products').delete().eq('id', p.id)
+    setDeleteTarget(p)
+  }
+
+  const confirmDelete = async () => {
+    if (!deleteTarget) return
+    const { error } = await supabase.from('products').delete().eq('id', deleteTarget.id)
     if (error) toast.error('Gagal menghapus')
     else { toast.success('Produk dihapus'); fetchProducts() }
+    setDeleteTarget(null)
   }
 
   const filtered = products.filter((p) => {
@@ -416,6 +423,19 @@ export default function ProductsPage() {
           </div>
         </div>
       )}
+
+      {/* Confirm Dialog — Hapus Produk */}
+      <ConfirmDialog
+        open={deleteTarget !== null}
+        title="Hapus Produk?"
+        message={`Produk "${deleteTarget?.name}" dan semua data stok terkait akan dihapus permanen. Tindakan ini tidak bisa dibatalkan.`}
+        confirmLabel="Ya, Hapus"
+        cancelLabel="Batal"
+        variant="danger"
+        icon="trash"
+        onConfirm={confirmDelete}
+        onCancel={() => setDeleteTarget(null)}
+      />
     </div>
   )
 }
